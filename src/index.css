@@ -22,3 +22,29 @@ code {
   display: block;
   margin :-5px 0;
 }
+
+#supportHero{
+  background-color: rgb(56, 126, 209);
+  color: white;
+}
+
+#supportWrapper{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0 150px;
+}
+
+#supportHero a{
+  text-decoration: none;
+  color: white;
+  padding-right: 20px;
+}
+
+#supportHero input{
+  height: 65px;
+  width: 450px;
+  border-radius: 7px;
+  padding: 20px;
+}
+
