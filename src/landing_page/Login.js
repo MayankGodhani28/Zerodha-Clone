@@ -3,20 +3,20 @@ import {useNavigate } from 'react-router-dom'
 
 import axios from "axios";
 
-function Signup() {
+function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const navigate=useNavigate();
+  
 
-  let handleSignup =async () => {
+  let handleLogin =async () => {
     try {
-      await axios.post("http://localhost:3002/signup", { username, password });
-     
-      // res.json(username, password);
-      alert("SignUp successfull");
-      navigate("/login");
+      const res=await axios.post("http://localhost:3002/login", { username, password });
+        localStorage.setItem('token',res.data.token);
+      
+      alert("Login successfull");
+      window.location.href = `http://localhost:3001/?token=${res.data.token}`;
     } catch (e) {
-      alert(e.response.data.msg || "signup failed");
+      alert(e?.response?.data?.msg);
     }
   };
 
@@ -24,11 +24,12 @@ function Signup() {
   return (
     <div className="row">
       <div className="col-6 offset-3">
-        <h1>Signup</h1>
+        <h1>Login</h1>
       </div>
+      <br />
+      <br />
       <div className="col-6 offset-3">
-        <br />
-        <label htmlFor="username">Username :</label> 
+        <label htmlFor="username">Username :</label>
         <input
           type="text"
           name="username"
@@ -40,8 +41,7 @@ function Signup() {
         />
         <br />
         <br />
-
-        <label htmlFor="password">Password : </label>
+        <label htmlFor="password">Password :</label>
         <input
           type="text"
           name="password"
@@ -53,11 +53,11 @@ function Signup() {
         />
         <br />
         <br />
-        <button onClick={handleSignup}>Signup</button>
+        <button onClick={handleLogin}>Login</button>
         <br /><br />
       </div>
     </div>
   );
 }
 
-export default Signup;
+export default Login;
